@@ -31,14 +31,55 @@ plt.show()
 ### your code here!  name your classifier object clf if you want the 
 ### visualization code (prettyPicture) to show you the decision boundary
 
+from sklearn.naive_bayes import GaussianNB
+from sklearn import svm
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.ensemble import AdaBoostClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
+
+def makePrediction(cls,features_train,labels_train,features_test,labels_test):
+	cls.fit(features_train,labels_train)
+	pred = cls.predict(features_test)
+	print 'Accuracy is %0.3f ' % (accuracy_score(pred,labels_test))
+	#prettyPicture(cls, features_test, labels_test)
+
+
+# Implement NaiveBayes
+nbCls=GaussianNB()
+print 'Checking Naive Bayes'
+makePrediction(nbCls,features_train,labels_train,features_test,labels_test)
+
+# Implement SVM
+svmCls=svm.SVC()
+print 'Checking SVM-SVC'
+makePrediction(svmCls,features_train,labels_train,features_test,labels_test)
+
+# Implement DecisionTreeClassifier
+decTreeCls=DecisionTreeClassifier(min_samples_split=40)
+print 'Checking Decision Tree'
+makePrediction(svmCls,features_train,labels_train,features_test,labels_test)
+
+# Implement KNN Classifiers
+knn = KNeighborsClassifier(n_neighbors=3)
+print 'Checking KNN'
+makePrediction(knn,features_train,labels_train,features_test,labels_test)
+
+# Implement AdaBoost Classifier 
+adaBoost=AdaBoostClassifier()
+print 'Checking AdaBoost'
+makePrediction(adaBoost,features_train,labels_train,features_test,labels_test)
+
+# Implement RandomForest Classifier
+
+randomForest = RandomForestClassifier()
+print 'Checking RandomForest'
+makePrediction(randomForest,features_train,labels_train,features_test,labels_test)
 
 
 
-
-
-
-
-try:
-    prettyPicture(clf, features_test, labels_test)
-except NameError:
-    pass
+#try:
+#    prettyPicture(clf, features_test, labels_test)
+#except NameError:
+#    pass

@@ -25,6 +25,39 @@ features_train, features_test, labels_train, labels_test = preprocess()
 #########################################################
 ### your code goes here ###
 
+from sklearn import svm
+from sklearn.metrics import accuracy_score
+
+
+#cls = svm.SVC(kernel='linear')
+
+
+cVal = 10000
+print 'C = %d' % cVal
+cls = svm.SVC(kernel='rbf',C=cVal)
+
+
+# Try this on a smaller set 
+#features_train = features_train[:len(features_train)/100]
+#labels_train = labels_train[:len(labels_train)/100]
+
+t0 = time()
+cls.fit(features_train,labels_train)
+print "training time:", round(time()-t0, 3), "s"
+
+t0=time()
+y_pred = cls.predict(features_test)
+print "prediction time:", round(time()-t0, 3), "s"
+
+sum = 0
+for x in y_pred:
+	sum += x
+
+print sum
+
+print 'Accuracy is %.2f' % accuracy_score(y_pred,labels_test)
+
+
 #########################################################
 
 
